@@ -1,0 +1,65 @@
+.gantt-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.resources-section{
+  flex: 0 0 auto;
+  table {
+    border-right: 1px solid #ccc;
+  }
+  th,td {
+    min-width: 100px;
+    white-space:nowrap;
+  }
+  th {
+    z-index: 1
+  }
+}
+
+.planing-section {
+  flex: 1 1 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  th,td{
+    min-width: 80 px;
+    padding: 8px;
+    border: 1px solif #ccc;
+
+  }
+  th {
+    z-index: 2
+  }
+}
+
+table {
+  with: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  table-layout: fixed;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+td {
+  background-color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.scheduled {
+  background-color: #4CAF50;
+  color: white
+}

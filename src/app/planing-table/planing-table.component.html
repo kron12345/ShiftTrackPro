@@ -1,0 +1,22 @@
+<div class="gantt-container">
+  <div class="resources-section">
+    <table class="resources">
+      <tr>
+        <th>Resources</th>
+      </tr>
+      <tr *ngFor="let resource of resources">
+        <td>{{ resource.name}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="planing-section">
+    <table class="planing">
+      <tr>
+        <th *ngFor="let date of dates">{{ date }}</th>
+      </tr>
+      <tr *ngFor="let resource of resources">
+        <td *ngFor="let date of dates" [class.scheduled]="isTaskScheduled(resource, date)">{{ isTaskScheduled(resource, date) }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
