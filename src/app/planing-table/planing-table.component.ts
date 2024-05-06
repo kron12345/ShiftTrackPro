@@ -29,14 +29,14 @@ export class PlaningTableComponent {
 
   timeIntervals: string[] = []
   columnIntervalSeconds: number = 3600
-  columWidth: number = 400
-  secondsPerPixel: number = 0
+  columWidth: number = 10
+  secondsPerEm: number = 0
 
   constructor() { }
 
   ngOnInit(): void {
     this.timeIntervals = this.generateTimeIntervals('2023-05-01', '2023-05-10', this.columnIntervalSeconds);
-    this.secondsPerPixel = this.columnIntervalSeconds / this.columWidth;
+    this.secondsPerEm = this.columnIntervalSeconds / this.columWidth;
   }
 
   generateTimeIntervals(startDate: string, endDate: string, intervalSecondes: number): string[] {
