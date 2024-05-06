@@ -7,37 +7,57 @@ import { Component } from '@angular/core';
 })
 export class PlaningTableComponent {
   resources = [
-    {name: 'Resource 1', tasks:[{start: '2023-05-01', end: '2023-05-05'}]},
-    {name: 'Resource 2', tasks:[{start: '2023-05-03', end: '2023-05-10'}]}
+    {
+      name: 'Resource 1',
+      tasks: [{
+        start: '2023-05-01T05:11:00',
+        end: '2023-05-05T11:20:00',
+        from: 'BRBG',
+        to: 'CHSM'
+      }]
+    },
+    {
+      name: 'Resource 2',
+      tasks: [{
+        start: '2023-05-03T02:00:14',
+        end: '2023-05-10T18:15:15',
+        from: 'BS',
+        to: 'OL'
+      }]
+    }
   ];
 
-  dates: string[] = []
+  timeIntervals: string[] = []
+  columnIntervalSeconds: number = 3600
+  columWidth: number = 400
+  secondsPerPixel: number = 0
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    this.dates = this.generateDateRange('2023-05-01', '2023-05-10');
+    this.timeIntervals = this.generateTimeIntervals('2023-05-01', '2023-05-10', this.columnIntervalSeconds);
+    this.secondsPerPixel = this.columnIntervalSeconds / this.columWidth;
   }
 
-  generateDateRange(startDate: string, endDate:string): string[]{
-    let start = new Date(startDate);
-    let end = new Date(endDate);
-    let dates: string[] = [];
+  generateTimeIntervals(startDate: string, endDate: string, intervalSecondes: number): string[] {
+    let intervals: string[] = [];
+    let start = new Date(`${startDate}T:00:00:00Z`);
+    let end = new Date(`${endDate}T23:59:59Z`);
 
-    while (start <= end) {
-      dates.push(start.toISOString().split('T')[0]);
-      start.setDate(start.getDate()+1);
+    while (start < end) {
+      intervals.push(start.toISOString()); // Zeit im HH:MM-Format extrahieren
+      start.setSeconds(start.getSeconds() + intervalSecondes);
     }
 
-    return dates;
+    return intervals;
   }
 
-  isTaskScheduled(resource: any, date: string): string {
-  for (let task of resource.tasks) {
-    if (new Date(task.start) <= new Date(date) && new Date(task.end) >= new Date(date)) {
-      return 'X';  // Markieren Sie die Zelle, wenn eine Aufgabe geplant ist
+  isTaskScheduled(resource: any, date: string): boolean {
+    for (let task of resource.tasks) {
+      if (new Date(task.start) <= new Date(date) && new Date(task.end) >= new Date(date)) {
+        return true;  // Markieren Sie die Zelle, wenn eine Aufgabe geplant ist
+      }
     }
+    return false;  // Die Zelle bleibt leer, wenn keine Aufgabe geplant ist
   }
-  return '';  // Die Zelle bleibt leer, wenn keine Aufgabe geplant ist
-}
 }

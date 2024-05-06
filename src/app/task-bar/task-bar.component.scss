@@ -1,0 +1,18 @@
+.task-bar {
+  height: 20px;
+  background-color: #4CAF50; // Grüner Balken
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.from {
+  flex-grow: 1;
+}
+
+.to {
+  flex-grow: 1;
+  text-align: right;
+}

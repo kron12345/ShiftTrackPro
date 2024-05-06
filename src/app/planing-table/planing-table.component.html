@@ -15,7 +15,9 @@
         <th *ngFor="let date of dates">{{ date }}</th>
       </tr>
       <tr *ngFor="let resource of resources">
-        <td *ngFor="let date of dates" [class.scheduled]="isTaskScheduled(resource, date)">{{ isTaskScheduled(resource, date) }}</td>
+        <td *ngFor="let date of dates" [ngClass]="{'task-cell': isTaskScheduled(resource, date)}">
+          <app-task-bar *ngIf="isTaskScheduled(resource, date)" [start]="getStartDate(resource, date)" [end]="getEndDate(resource, date)" [from]="resource.from" [to]="resource.to"></app-task-bar>
+        </td>
       </tr>
     </table>
   </div>
